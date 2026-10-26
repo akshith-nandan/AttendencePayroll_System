@@ -49,7 +49,7 @@ const PayrollSchema = new mongoose.Schema({
         required: true,
         min: 0,
     },
-    totalworkingHours: {
+    totalWorkingMinutes: {
         type: Number,
         required: true,
         min: 0

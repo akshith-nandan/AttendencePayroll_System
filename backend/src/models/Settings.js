@@ -1,6 +1,4 @@
-const { applyTimestamps } = require("./Payroll");
-
-const mongoose = required('mongoose');
+const mongoose = require('mongoose');
 const SettingSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -11,27 +9,27 @@ const SettingSchema = new mongoose.Schema({
         type: String,
         default: 'Asia/Kolkata'
     },
-    morningStartAt: {
+    checkInStart: {
         type: String,
         required: true,
         match:  [/^([01]\d|2[0-3]):[0-5]\d$/, 'Time must be in HH:mm format']
     },
-    morningEndAt: {
+    checkInEnd: {
         type: String,
         required: true,
         match: [/^([01]\d|2[0-3]):[0-5]\d$/, 'Time must be in HH:mm format']
     },
-    EveningStartAt: {
+    checkOutStart: {
         type: String,
         required: true,
         match: [/^([01]\d|2[0-3]):[0-5]\d$/,'Time must be in HH:mm format']
     },
-    EveningEndAt: {
+    checkOutEnd: {
         type: String,
         required: true,
         match: [/^([01]\d|2[0-3]):[0-5]\d$/,'Time must be in HH:mm format']
     },
-    requiredWorkingHours: {
+    requiredWorkingMinutes: {
         type: Number,
         required: true,
     },

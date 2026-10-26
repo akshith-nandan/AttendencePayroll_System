@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const AttendenceSchema = new mongoose.Schema({
-    id: {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
-    },
     employeeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Employee',
+        required: true,
+    },
+    date: {
+        type: String,
+        required: true,
     },
     checkIn: {
         time: {
@@ -51,5 +51,7 @@ const AttendenceSchema = new mongoose.Schema({
         required: true,
     }
 }, { timestamps: true });
+
+AttendenceSchema.index({ employeeId: 1, date: 1 }, { unique: true });
 
 module.exports = mongoose.model('Attendence', AttendenceSchema);

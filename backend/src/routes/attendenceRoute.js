@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const {
+    checkIn,
+    checkOut
+} = require('../controllers/attendence');
 
-router.get('/',(req,res)=> {
-    res.json({ success: true, message: 'Attendence route working' });
-});
+
+router.post('/checkIn',checkIn);
+
+router.post('/checkOut',checkOut);
 
 module.exports = router;
