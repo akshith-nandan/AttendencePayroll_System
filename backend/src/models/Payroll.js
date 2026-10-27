@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const PayrollSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: mongoose.Schema.Types.ObjectId,
         unique: true,
         required: true,

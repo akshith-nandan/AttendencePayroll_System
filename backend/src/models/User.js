@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const UserSchema = new mongoose.Schema({
-    id : {
+    _id : {
         type: mongoose.Schema.Types.ObjectId,
         unique: true,
         required: true,
@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-Userschema.pre('save', async function(){
+UserSchema.pre('save', async function(){
     if(!this.isModified('password')){
         return;
     }
@@ -53,7 +53,7 @@ Userschema.pre('save', async function(){
     this.password = await bcrypt.hash(this.password, salt);
 });
 
-Userschema.methods.matchPassword = async function(enteredPassword){
+UserSchema.methods.matchPassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password);
 };
 

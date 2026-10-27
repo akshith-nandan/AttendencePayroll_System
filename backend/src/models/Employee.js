@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const EmployeeSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: mongoose.Schema.Types.ObjectId,
         unique: true,
         required: true,
