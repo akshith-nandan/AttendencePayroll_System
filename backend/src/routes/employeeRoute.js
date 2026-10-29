@@ -8,10 +8,10 @@ const adminMiddleware = require('../middlewares/adminMiddleware');
 
 router.use(protect,adminMiddleware);
 
-router.post('/createEmployee',createEmployee);
-router.get('/getEmployees',getEmployees);
-router.get('/getEmployeeById',getEmployeeById);
-router.put('/updateEmployee',updateEmployee);
-router.patch('/deativeEmployee',deactivateEmployee);
+router.post('/',createEmployee);
+router.get('/',getEmployees);
+router.get('/:id',getEmployeeById);
+router.put('/:id',updateEmployee);
+router.patch('/:id/deactivate',deactivateEmployee);
 
 module.exports = router;
