@@ -58,7 +58,7 @@ const PayrollSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Decimal128,
         required: true,
     },
-    deduction: {
+    deductions: {
         type: mongoose.Schema.Types.Decimal128,
         required: true,
     },
