@@ -1,4 +1,6 @@
 const Attendence = require('../models/Attendence');
+const Attendence = require('../models/Attendence');
+const { rawListeners } = require('../models/Settings');
 const User = require('../models/User');
 const USer = require('../models/User');
 
@@ -206,4 +208,40 @@ const getEmployeeReport = async(req,res) => {
     }
 };
 
-module.exports = { getDailyReport, getWeeklyReport, getMonthlyReport, getEmployeeReport};
+const getMyReport = async(req,res) => {
+    try {
+        const employeeId = req.user.id;
+        const  {startDate,endDate} = req.query;
+
+        const filter = {
+            employee: employeeId
+        };
+
+        if (startDate || endDate){
+            filter.date = {};
+
+            if (startDate){
+                filter.date.$lte = startDate;
+            }
+
+            if (endDate){
+                filter.date.$lte = endDate;
+            }
+        }
+
+        const attendence = await Attendence.find(filter)
+        .sort({ date: -1});
+
+        return res.status(200).json({
+            message: "Your attendence Report",
+            totalRecords: attendence.length,
+            attendence
+        });
+    }catch (error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+module.exports = { getDailyReport, getWeeklyReport, getMonthlyReport, getEmployeeReport, getMyReport};

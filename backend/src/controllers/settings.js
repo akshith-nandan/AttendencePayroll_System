@@ -34,7 +34,7 @@ const updateSettings = async(req,res) => {
             checkInStart,
             checkInEnd,
             checkOutStart,
-            checkoutEnd,
+            checkOutEnd,
             requiredWorkMinutes,
             timezone,
         } = req.body;
