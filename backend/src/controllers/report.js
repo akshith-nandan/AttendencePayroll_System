@@ -1,8 +1,6 @@
 const Attendence = require('../models/Attendence');
-const Attendence = require('../models/Attendence');
-const { rawListeners } = require('../models/Settings');
+const Settings = require('../models/Settings');
 const User = require('../models/User');
-const USer = require('../models/User');
 
 const isValidDate = (value) => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")){
@@ -172,7 +170,7 @@ const getEmployeeReport = async(req,res) => {
         
         const employee = await User.findOne({
             _id: employeeId,
-            role: "employee",
+            role: "Employee",
         }).select("name email employeeId department");
 
         if (!employee){

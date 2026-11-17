@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 const createEmployee = async(req,res) => {
@@ -11,6 +10,7 @@ const createEmployee = async(req,res) => {
             department,
             designation,
             salary,
+            phone,
         } = req.body;
 
         if (!name || !email || !password || !employeeId){
@@ -29,17 +29,16 @@ const createEmployee = async(req,res) => {
             });
         }
 
-        const hashPassword = await bcrypt.hash(password,12);
-
         const employee = await User.create({
             name: name.trim(),
-            email: existingEmail,
-            password: hashPassword,
+            email: email.trim().toLowerCase(),
+            password,
             employeeId,
             department,
             designation,
             salary,
-            role: "employee",
+            phone,
+            role: "Employee",
             isActive: true,
         });
 
@@ -58,6 +57,12 @@ const createEmployee = async(req,res) => {
     }catch ( error ){
         console.error('Create Employee error', error );
 
+        if (error.code === 11000) {
+            return res.status(409).json({
+                message: 'Email or employee ID already exists',
+            });
+        }
+
         return res.status(500).json({
             message: 'Failed to create Employee'
         });
@@ -66,7 +71,7 @@ const createEmployee = async(req,res) => {
 
 const getEmployees = async(req,res) => {
     try {
-        const employees = await User.find({ role: "employee" })
+        const employees = await User.find({ role: "Employee" })
             .select("-password")
             .sort({ createdAt: -1 });
 
@@ -87,7 +92,7 @@ const  getEmployeeById = async(req,res) => {
     try {
         const employee = await User.findOne({
             _id: req.params.id,
-            role: "employee",
+            role: "Employee",
         }).select("-password");
 
         if (!employee) {
@@ -128,7 +133,7 @@ const updateEmployee = async(req,res) => {
         const employee = await User.findOneAndUpdate(
             {
                 _id: req.params.id,
-                role: "employee",
+                role: "Employee",
             },
             { $set: updates },
             {
@@ -165,7 +170,7 @@ const deactivateEmployee = async(req,res) => {
         const employee = await User.findOneAndUpdate(
             {
                 _id: req.params.id,
-                role: "employee",
+                role: "Employee",
             },
             { $set: {isActive: false} },
             { new: true }

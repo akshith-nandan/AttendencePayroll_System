@@ -54,7 +54,7 @@ const generatePayroll = async(req,res) => {
 
         const employee = await User.findById(employeeId);
 
-        if (!employee || employee.role !== "employee"){
+        if (!employee || employee.role !== "Employee"){
             return res.status(404).json({
                 message: "Employee not found"
             });

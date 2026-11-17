@@ -20,7 +20,7 @@ const register = async(req,res) => {
             });
         }
 
-        if (!password.length < 8){
+        if (password.length < 8){
             return res.status(400).json({
                 message: 'Password must be atleast 8 characters'
             });
@@ -38,13 +38,10 @@ const register = async(req,res) => {
             });
         }
 
-        const hashPassword = await bcyrpt.hash(password, 12);
-
         const user = await User.create({
             name: name.trim(),
             email: normalizedEmail,
-            password: hashPassword,
-            role: 'employee',
+            password,
         });
 
         const token = generateToken(user._id.toString());
@@ -124,6 +121,27 @@ const login = async(req,res) => {
     }
 };
 
+const logout = async(req,res) => {
+    try {
+        res.ClearCokkie("token", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax"
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Logged out Successfully"
+        });
+    }catch ( error ){
+        return res.status(500).json({
+            success: "falied",
+            message: "Logout Failed"
+        })
+    }
+}
+
+
 const getMe = async(req,res) =>{
     try {
         const user = await User.findById(req.user._id).select("-password");
@@ -145,4 +163,4 @@ const getMe = async(req,res) =>{
     }
 };
 
-module.exports = { register,login,getMe };
+module.exports = { register,login,getMe,logout };

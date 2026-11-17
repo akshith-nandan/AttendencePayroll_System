@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const UserSchema = new mongoose.Schema({
-    _id : {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
-    },
     name : {
         type: String,
         required: [true, 'name is required'],
@@ -18,6 +13,24 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+    },
+    employeeId: {
+        type: String,
+        unique: true,
+        sparse: true,
+        trim: true,
+    },
+    department: {
+        type: String,
+        trim: true,
+    },
+    designation: {
+        type: String,
+        trim: true,
+    },
+    salary: {
+        type: Number,
+        min: 0,
     },
     phone:{
         type: String,
