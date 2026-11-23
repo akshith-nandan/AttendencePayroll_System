@@ -9,7 +9,7 @@ import {
     loginUser,
     getCurrentUser,
     logoutUser
-} from "../services/authService"
+} from "../services/authServices"
 
 const AuthContext = createContext(null);
 
