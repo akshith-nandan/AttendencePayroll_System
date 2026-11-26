@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 
 const AdminLayout = () => {
     return (
-        <div className="flex mn-h-screen">
+        <div className="flex min-h-screen">
 
             <Sidebar/>
 

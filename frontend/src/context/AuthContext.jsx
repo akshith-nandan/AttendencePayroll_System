@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
                 if (active) {
                     setUser(data.user ?? data);
                 }
-            }catch ( error ){
+            }catch {
                 localStorage.removeItem("token");
 
                 if (active) {

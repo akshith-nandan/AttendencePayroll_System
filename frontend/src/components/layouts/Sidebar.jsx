@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
     LayoutDashboard,
     Users,
-    ClipsboardList,
+    ClipboardList,
     Wallet,
     Settings
 } from "lucide-react";
@@ -24,7 +24,7 @@ const Sidebar = () => {
         {
             name: "Payroll",
             path: "/admin/payroll",
-            icon: ClipsboardList
+            icon: ClipboardList
         },
         {
             name: "Report",

@@ -1,7 +1,7 @@
 import api from "./api";
 
 export const getDailyReport = async (date) => {
-    const response = await api.get("/reports/daily", {
+    const response = await api.get("/report/daily", {
         params: { date }
     });
 
@@ -9,7 +9,7 @@ export const getDailyReport = async (date) => {
 };
 
 export const getWeeklyReport = async (startDate) => {
-    const response = await api.get("/reports/weekly", {
+    const response = await api.get("/report/weekly", {
         params: { startDate }
     });
 
@@ -17,7 +17,7 @@ export const getWeeklyReport = async (startDate) => {
 };
 
 export const getMontlyReport = async (month, year) => {
-    const response = await api.get("/reports/monthly", {
+    const response = await api.get("/report/monthly", {
         params: { month, year }
     });
 
@@ -29,7 +29,7 @@ export const getEmployeeReport = async (
     startDate,
     endDate
 ) => {
-    const response = await api.get(`/reports/employee/${employeeId}`,
+    const response = await api.get(`/report/employee/${employeeId}`,
         {
             params: { startDate, endDate }
         }

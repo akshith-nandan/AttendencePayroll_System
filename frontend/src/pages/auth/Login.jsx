@@ -18,9 +18,7 @@ const Login = () => {
         try {
             const data = await login(email, password);
 
-            localStorage.setItem("token", data.token);
-
-            if (data.user.role === "admin"){
+            if (data.role === "admin"){
                 navigate("/admin/dashboard", { replace: true});
             } else {
                 navigate("/employee/dashboard", { replace: true});
@@ -35,7 +33,7 @@ const Login = () => {
     };
 
     return (
-        <div calssName="min-h-screen flex items-center justify-center bg-grey-100">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <form
             onSubmit = {handleSubmit}
             className="bg-white p-8 rounded-xl shadow-md w-96"

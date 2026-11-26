@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/auth/Login";
 import ProtectedRoute from "./components/layouts/ProtectedRoute";
@@ -14,6 +14,7 @@ import Settings from "./pages/admin/Settings";
 const App = () => {
     return (
         <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
 
             <Route path="/login" element={<Login/>} />
 
@@ -40,8 +41,8 @@ const App = () => {
                     />
 
                     <Route
-                        path="report"
-                        element= {<Report />}
+                        path="reports"
+                        element= {<Reports />}
                     />
 
                     <Route
